@@ -1,4 +1,4 @@
-package com.linuxrefguide.content
+package com.linuxrefguide
 
 enum class NavigationState {
     MAIN_MENU,

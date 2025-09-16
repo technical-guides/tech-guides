@@ -1,5 +1,7 @@
 package com.linuxrefguide.content
 
+import com.linuxrefguide.NavigationState
+
 object ContentProvider {
     fun getWelcomeMessage(): String = """
 🐧 Welcome to the Linux Ref. Guide! 🐧

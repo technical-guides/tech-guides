@@ -1,5 +1,7 @@
 package com.linuxrefguide.content
 
+import com.linuxrefguide.NavigationState
+
 object MenuStructure {
     data class MenuItem(val label: String, val id: String, val description: String = "")
 

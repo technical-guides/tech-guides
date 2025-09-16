@@ -13,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import com.linuxrefguide.ui.MainScreen
 import com.linuxrefguide.ui.SubtopicScreen
 import com.linuxrefguide.ui.TopicScreen
-import com.linuxrefguide.ui.WelcomeScreen
 import com.linuxrefguide.ui.theme.LinuxRefGuideTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,9 +41,6 @@ fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
             MainScreen(navController = navController)
-        }
-        composable("welcome") {
-            WelcomeScreen(navController = navController)
         }
         composable("subtopics/{level}") { backStackEntry ->
             val level = backStackEntry.arguments?.getString("level") ?: "basic"

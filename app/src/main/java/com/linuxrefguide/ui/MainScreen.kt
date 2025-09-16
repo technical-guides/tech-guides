@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.linuxrefguide.content.ContentProvider
+import com.linuxrefguide.ui.theme.DarkHeaderBackground
 
 @Composable
 fun MainScreen(navController: NavController) {
@@ -22,13 +22,24 @@ fun MainScreen(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Linux Ref. Guide",
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 24.dp)
-        )
+        Spacer(modifier = Modifier.height(120.dp))
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = DarkHeaderBackground
+            )
+        ) {
+            Text(
+                text = "Linux Ref. Guide",
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            )
+        }
 
         // Basic Topics
         Card(
@@ -36,13 +47,13 @@ fun MainScreen(navController: NavController) {
                 .fillMaxWidth()
                 .clickable { navController.navigate("subtopics/basic") },
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
+                containerColor = DarkHeaderBackground
             )
         ) {
             Text(
-                text = "📖 Basic Topics",
+                text = "Basic",
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
@@ -56,13 +67,13 @@ fun MainScreen(navController: NavController) {
                 .fillMaxWidth()
                 .clickable { navController.navigate("subtopics/intermediate") },
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
+                containerColor = DarkHeaderBackground
             )
         ) {
             Text(
-                text = "⚡ Intermediate Topics",
+                text = "Intermediate",
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
@@ -76,13 +87,13 @@ fun MainScreen(navController: NavController) {
                 .fillMaxWidth()
                 .clickable { navController.navigate("subtopics/advanced") },
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
+                containerColor = DarkHeaderBackground
             )
         ) {
             Text(
-                text = "🚀 Advanced Topics",
+                text = "Advanced",
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
@@ -91,24 +102,5 @@ fun MainScreen(navController: NavController) {
         }
 
         Spacer(modifier = Modifier.weight(1f))
-
-        // Welcome Button
-        Button(
-            onClick = { navController.navigate("welcome") },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Welcome")
-        }
-
-        // Exit Button
-        Button(
-            onClick = { /* Close app: handled by activity finish() in MainActivity */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.error
-            )
-        ) {
-            Text("Exit")
-        }
     }
 }

@@ -1,6 +1,8 @@
 package com.linuxrefguide.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,10 +12,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.linuxrefguide.ui.theme.DarkHeaderBackground
+import com.linuxrefguide.ui.theme.DarkPurpleBackground
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.sp
 import com.linuxrefguide.content.ContentProvider
+import com.linuxrefguide.ui.theme.GreenBackground
 
 @Composable
 fun TopicScreen(navController: NavController, level: String, id: String) {
+    // Log level, id, and content for debugging
+    val content = ContentProvider.getTopicContent(level, id).ifEmpty {
+        "No content found for level: $level, id: $id"
+    }
+    Log.d("TopicScreen", "Rendering topic for level: $level, id: $id, content: $content")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -21,28 +35,69 @@ fun TopicScreen(navController: NavController, level: String, id: String) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = id.replaceFirstChar { it.uppercase() },
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Text(
-            text = ContentProvider.getTopicContent(level, id),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-        )
+        Spacer(modifier = Modifier.height(24.dp)) // Add space above back button
 
         Button(
             onClick = { navController.popBackStack("subtopics/$level", inclusive = false) },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+            shape = RectangleShape,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = GreenBackground
+            )
         ) {
-            Text("Back to ${level.replaceFirstChar { it.uppercase() }} Topics")
+            Text(
+                text = "Back to ${level.replaceFirstChar { it.uppercase() }} Topics",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = DarkHeaderBackground
+            )
+        ) {
+            Text(
+                text = id.replaceFirstChar { it.uppercase() },
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+//                // Debug: Display level and id on-screen
+//                Text(
+//                    text = "Debug: level=$level, id=$id",
+//                    style = MaterialTheme.typography.bodySmall,
+//                    color = MaterialTheme.colorScheme.onBackground,
+//                    modifier = Modifier.fillMaxWidth()
+//                )
+
+                Text(
+                    text = content,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }

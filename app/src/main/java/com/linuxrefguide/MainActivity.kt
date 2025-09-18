@@ -1,6 +1,8 @@
 package com.linuxrefguide
 
+import android.adservices.topics.Topic
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -38,18 +40,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
+    val topic = "Linux"
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
-            MainScreen(navController = navController)
+            MainScreen(navController = navController, topic = topic)
         }
         composable("subtopics/{level}") { backStackEntry ->
-            val level = backStackEntry.arguments?.getString("level") ?: "basic"
-            SubtopicScreen(navController = navController, level = level)
+            val level = backStackEntry.arguments?.getString("level") ?: "N/A"
+            Log.d("Level:", level)
+            SubtopicScreen(navController = navController, topic = topic, level = level)
         }
         composable("topic/{level}/{id}") { backStackEntry ->
-            val level = backStackEntry.arguments?.getString("level") ?: "basic"
-            val id = backStackEntry.arguments?.getString("id") ?: "files"
-            TopicScreen(navController = navController, level = level, id = id)
+            val level = backStackEntry.arguments?.getString("level") ?: "N/A"
+            val id = backStackEntry.arguments?.getString("id") ?: "N/A"
+            Log.d("Level:", level)
+            TopicScreen(navController = navController, topic = topic, level = level, id = id)
         }
     }
 }

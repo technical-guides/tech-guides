@@ -2,7 +2,6 @@ package com.linuxrefguide.ui
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,17 +12,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.linuxrefguide.ui.theme.DarkHeaderBackground
-import com.linuxrefguide.ui.theme.DarkPurpleBackground
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.unit.sp
-import com.linuxrefguide.content.ContentProvider
+import com.linuxrefguide.content.ContentProviderFactory
+import com.linuxrefguide.content.LinuxContentProvider
 import com.linuxrefguide.ui.theme.GreenBackground
 
 @Composable
-fun TopicScreen(navController: NavController, level: String, id: String) {
+fun TopicScreen(navController: NavController, topic: String, level: String, id: String) {
     // Log level, id, and content for debugging
-    val content = ContentProvider.getTopicContent(level, id).ifEmpty {
+    val provider = ContentProviderFactory.getContentProvider(topic)
+    val content = provider.getTopicContent(level, id).ifEmpty {
         "No content found for level: $level, id: $id"
     }
     Log.d("TopicScreen", "Rendering topic for level: $level, id: $id, content: $content")

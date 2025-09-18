@@ -13,7 +13,8 @@ import androidx.navigation.NavController
 import com.linuxrefguide.ui.theme.DarkHeaderBackground
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(navController: NavController, topic: String) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -31,7 +32,7 @@ fun MainScreen(navController: NavController) {
             )
         ) {
             Text(
-                text = "Linux Ref. Guide",
+                text = "$topic Ref. Guide",
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
@@ -45,13 +46,13 @@ fun MainScreen(navController: NavController) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { navController.navigate("subtopics/basic") },
+                .clickable { navController.navigate("subtopics/basics") },
             colors = CardDefaults.cardColors(
                 containerColor = DarkHeaderBackground
             )
         ) {
             Text(
-                text = "Basic",
+                text = "Basics",
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier

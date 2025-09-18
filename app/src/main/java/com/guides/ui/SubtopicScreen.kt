@@ -1,4 +1,4 @@
-package com.linuxrefguide.ui
+package com.guides.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,10 +12,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.linuxrefguide.ui.theme.DarkHeaderBackground
-import com.linuxrefguide.ui.theme.DarkPurpleBackground
-import com.linuxrefguide.ui.theme.GreenBackground
-import java.io.Serializable
+import com.guides.ui.theme.DarkHeaderBackground
+import com.guides.ui.theme.GreenBackground
 
 @Composable
 fun SubtopicScreen(navController: NavController, topic: String, level: String) {

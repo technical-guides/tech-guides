@@ -1,6 +1,6 @@
-package com.linuxrefguide.content
+package com.guides.content
 
-import com.linuxrefguide.NavigationState
+import com.guides.NavigationState
 
 object JavaScriptContentProvider : ContentProvider {
     override fun getWelcomeMessage(): String = """

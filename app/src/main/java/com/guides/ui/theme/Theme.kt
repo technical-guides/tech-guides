@@ -1,4 +1,4 @@
-package com.linuxrefguide.ui.theme
+package com.guides.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -30,7 +30,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun LinuxRefGuideTheme(
+fun GuideTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

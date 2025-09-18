@@ -1,7 +1,6 @@
-package com.linuxrefguide.content
+package com.guides.content
 
-import com.linuxrefguide.NavigationState
-import com.linuxrefguide.content.ContentProvider
+import com.guides.NavigationState
 
 object NmapContentProvider : ContentProvider {
     override fun getWelcomeMessage(): String = """

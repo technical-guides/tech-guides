@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.linuxrefguide"
+    namespace = "com.guides"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.linuxrefguide"
+        applicationId = "com.guides"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

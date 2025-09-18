@@ -1,4 +1,4 @@
-package com.linuxrefguide.ui.theme
+package com.guides.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

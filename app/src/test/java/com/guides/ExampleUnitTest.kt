@@ -1,4 +1,4 @@
-package com.linuxrefguide
+package com.guides
 
 import org.junit.Test
 

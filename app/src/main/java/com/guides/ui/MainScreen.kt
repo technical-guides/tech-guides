@@ -1,4 +1,4 @@
-package com.linuxrefguide.ui
+package com.guides.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.linuxrefguide.ui.theme.DarkHeaderBackground
+import com.guides.ui.theme.DarkHeaderBackground
 
 @Composable
 fun MainScreen(navController: NavController, topic: String) {

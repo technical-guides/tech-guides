@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "LinuxRefGuide"
+rootProject.name = "Guides"
 include(":app")

@@ -1,4 +1,4 @@
-package com.linuxrefguide.ui
+package com.guides.ui
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -11,11 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.linuxrefguide.ui.theme.DarkHeaderBackground
+import com.guides.ui.theme.DarkHeaderBackground
 import androidx.compose.ui.graphics.RectangleShape
-import com.linuxrefguide.content.ContentProviderFactory
-import com.linuxrefguide.content.LinuxContentProvider
-import com.linuxrefguide.ui.theme.GreenBackground
+import com.guides.content.ContentProviderFactory
+import com.guides.ui.theme.GreenBackground
 
 @Composable
 fun TopicScreen(navController: NavController, topic: String, level: String, id: String) {

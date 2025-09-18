@@ -1,4 +1,4 @@
-package com.linuxrefguide.content
+package com.guides.content
 
 object ContentProviderFactory {
     fun getContentProvider(provider: String): ContentProvider {

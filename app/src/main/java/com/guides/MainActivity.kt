@@ -1,6 +1,5 @@
-package com.linuxrefguide
+package com.guides
 
-import android.adservices.topics.Topic
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -12,17 +11,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.linuxrefguide.ui.MainScreen
-import com.linuxrefguide.ui.SubtopicScreen
-import com.linuxrefguide.ui.TopicScreen
-import com.linuxrefguide.ui.theme.LinuxRefGuideTheme
+import com.guides.ui.MainScreen
+import com.guides.ui.SubtopicScreen
+import com.guides.ui.TopicScreen
+import com.guides.ui.theme.GuideTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LinuxRefGuideTheme {
+            GuideTheme {
                 val navController = rememberNavController()
                 // Register back press handler
                 onBackPressedDispatcher.addCallback(this) {
@@ -47,13 +46,11 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable("subtopics/{level}") { backStackEntry ->
             val level = backStackEntry.arguments?.getString("level") ?: "N/A"
-            Log.d("Level:", level)
             SubtopicScreen(navController = navController, topic = topic, level = level)
         }
         composable("topic/{level}/{id}") { backStackEntry ->
             val level = backStackEntry.arguments?.getString("level") ?: "N/A"
             val id = backStackEntry.arguments?.getString("id") ?: "N/A"
-            Log.d("Level:", level)
             TopicScreen(navController = navController, topic = topic, level = level, id = id)
         }
     }

@@ -2,18 +2,17 @@ package com.guides.content
 
 import com.guides.NavigationState
 
-object NessusContentProvider: ContentProvider {
-   override fun getWelcomeMessage(): String = """
+object NessusContentProvider : ContentProvider {
+    override fun getWelcomeMessage(): String = """
 🛡️ Welcome to the Nessus Ref. Guide! 🛡️
 
-This interactive tutorial will guide you through essential Nessus concepts,
-from basic vulnerability scanning to advanced compliance checks.
+This in-depth tutorial covers Nessus from fundamentals to advanced, with detailed explanations, multiple examples, and practical tips for vulnerability scanning.
 
 📖 What you'll learn:
 
-• Basic Topics: Installation, setup, basic scans
-• Intermediate Topics: Scan policies, credentialed scans, reports
-• Advanced Topics: Custom policies, plugins, automation
+• Basic Topics: Installation & setup, basic scans, dashboard, scan results
+• Intermediate Topics: Scan policies, credentialed scans, reports, compliance checks
+• Advanced Topics: Custom policies, plugins, automation, advanced analysis
 
 🎯 How to navigate:
 
@@ -24,12 +23,11 @@ from basic vulnerability scanning to advanced compliance checks.
 🚀 Getting Started:
 
 Choose a topic category from the sidebar to explore subtopics and start learning!
-Each section includes explanations, examples, and best practices.
+Each section includes thorough explanations, multiple code examples, safety tips, pro tips, common mistakes, and real-world applications.
 
-Good luck on your Nessus journey! 🎓
     """.trimIndent()
 
-   override fun getMenuContent(state: NavigationState): String {
+    override fun getMenuContent(state: NavigationState): String {
         return when (state) {
             NavigationState.MAIN_MENU -> """
 📚 Nessus Ref. Guide
@@ -54,7 +52,7 @@ Close the application.
 Select a subtopic to begin learning:
 
 🛠️ Installation & Setup
-Installing Nessus and initial configuration.
+Installing and configuring Nessus.
 
 🔍 Basic Scans
 Running vulnerability scans.
@@ -102,36 +100,71 @@ Deep dive into scan data.
         }
     }
 
-   override fun getTopicContent(level: String, id: String): String {
+    override fun getTopicContent(level: String, id: String): String {
         return when (level) {
             "basics" -> when (id) {
                 "install" -> """
 🛠️ Installation & Setup - Getting Started with Nessus
 
-Installing and configuring Nessus:
+Nessus is a leading vulnerability scanner by Tenable. This section covers installation, activation, and initial configuration.
 
-📥 Installation:
-• Download from tenable.com
-• Linux: sudo dpkg -i Nessus*.deb
-• Windows: Run installer
-• macOS: Install via DMG
+Detailed Explanation:
+Download from tenable.com. Activate with license. Setup users and plugins.
 
-🔧 Initial Setup:
-• Access: https://localhost:8834
-• Create admin account
-• Activate license (Professional)
+Multiple Code Examples:
+1. Linux Install:
+```bash
+sudo dpkg -i Nessus*.deb
+```
+Explanation: Installs Nessus package.
 
-🛡️ Configuration:
-• Set scan limits
-• Configure email notifications
+2. Start Nessus:
+```bash
+sudo /etc/init.d/nessusd start
+```
+Explanation: Starts Nessus service.
+
+3. Access UI:
+- https://localhost:8834
+Explanation: Opens web interface.
+
+4. Plugin Update:
+```bash
+/opt/nessus/sbin/nessus-update-plugins
+```
+Explanation: Updates vulnerability plugins.
+
+5. API Setup:
+```bash
+/opt/nessus/sbin/nessuscli fetch --register <license>
+```
+Explanation: Registers with license.
+
+6. User Creation:
+- UI: Settings > Users > Add
+Explanation: Adds admin user.
+
+7. Plugin Scan:
+```bash
+/opt/nessus/sbin/nessuscli update --plugins-only
+```
+Explanation: Updates only plugins.
+
+Common Mistakes:
+- Wrong license.
+- Firewall blocks port.
+
+Real-World Applications:
+- Vulnerability assessments.
+- Compliance.
 
 ⚠️ Safety Tips:
-• Secure admin credentials
-• Use on authorized systems
+• Secure UI.
+• Update plugins.
 
 💡 Pro Tips:
-• Update plugins regularly
-• Save config backups
+• Use agents.
+• API setup.
 
 [Interactive exercises coming soon!]
 
@@ -140,28 +173,37 @@ Press Escape to return to Basic Topics menu.
                 "scans" -> """
 🔍 Basic Scans - Running Vulnerability Scans
 
-Starting Nessus scans:
+Start basic scans in Nessus.
 
-🔍 Create Scan:
-• Scans > New Scan
-• Choose template (e.g., Basic Network Scan)
-• Set target IPs or domains
+Detailed Explanation:
+Create scan, set targets, launch.
 
-📜 Run Scan:
-• Launch immediately or schedule
-• Monitor progress in Scans tab
+Multiple Code Examples:
+1. Command Line Scan:
+```bash
+/opt/nessus/bin/nessuscmd 192.168.1.1 -T xml
+```
+Explanation: Scans IP, outputs XML.
 
-🛡️ Scan Options:
-• Set discovery settings
-• Limit ports for speed
+2. UI Scan Creation:
+- New Scan > Basic Network Scan
+Explanation: UI-based scan setup.
+
+Common Mistakes:
+- No targets.
+- Wrong policy.
+
+Real-World Applications:
+- Network security.
+- Audits.
 
 ⚠️ Safety Tips:
-• Scan authorized targets only
-• Avoid production systems
+• Authorized targets.
+• Limit scope.
 
 💡 Pro Tips:
-• Save scan templates
-• Use host discovery first
+• Schedule scans.
+• Export results.
 
 [Interactive exercises coming soon!]
 
@@ -170,27 +212,33 @@ Press Escape to return to Basic Topics menu.
                 "dashboard" -> """
 📡 Dashboard - Nessus Interface
 
-Navigating the Nessus UI:
+Navigate the Nessus dashboard.
 
-🔍 Scans Tab:
-• View running/completed scans
-• Pause or stop scans
+Detailed Explanation:
+View scans, vulnerabilities.
 
-📜 Vulnerabilities Tab:
-• View detected issues
-• Filter by severity
+Multiple Code Examples:
+1. API Dashboard Query:
+```bash
+curl -X GET -H "X-ApiKeys: accessKey=...; secretKey=..." https://localhost:8834/dashboard
+```
+Explanation: Fetches dashboard data via API.
 
-🛡️ Settings:
-• Configure global settings
-• Manage users and roles
+Common Mistakes:
+- Ignoring filters.
+- Outdated view.
+
+Real-World Applications:
+- Monitoring.
+- Reporting.
 
 ⚠️ Safety Tips:
-• Restrict UI access
-• Log out after use
+• Secure access.
+• Log out.
 
 💡 Pro Tips:
-• Customize dashboard views
-• Use filters for quick access
+• Custom dashboards.
+• Search queries.
 
 [Interactive exercises coming soon!]
 
@@ -199,27 +247,33 @@ Press Escape to return to Basic Topics menu.
                 "results" -> """
 📊 Scan Results - Interpreting Output
 
-Analyzing scan results:
+Analyze scan results.
 
-🔍 Viewing Results:
-• Scans > Completed > Click scan
-• Sort by severity or host
+Detailed Explanation:
+View vulns, hosts, severity.
 
-📜 Exporting:
-• Export as PDF, HTML, CSV
-• Reports > Generate Report
+Multiple Code Examples:
+1. API Results:
+```bash
+curl -X GET -H "X-ApiKeys: ..." https://localhost:8834/scans/1
+```
+Explanation: Fetches scan results via API.
 
-🛡️ Analysis:
-• Drill down into vulnerabilities
-• Check plugin details
+Common Mistakes:
+- Ignoring false positives.
+- No remediation.
+
+Real-World Applications:
+- Vuln management.
+- Reports.
 
 ⚠️ Safety Tips:
-• Secure result files
-• Share only with authorized parties
+• Secure results.
+• Prioritize critical.
 
 💡 Pro Tips:
-• Save custom report templates
-• Use filters for prioritization
+• Filter by severity.
+• Export CSV.
 
 [Interactive exercises coming soon!]
 
@@ -229,30 +283,35 @@ Press Escape to return to Basic Topics menu.
             }
             "intermediate" -> when (id) {
                 "policies" -> """
-🚪 Scan Policies - Customizing Scans
+🚪 Scan Policies - Custom Templates
 
-Configuring scan templates:
+Configure scan policies.
 
-🔍 Create Policy:
-• Policies > New Policy
-• Choose template or custom
-• Set scan parameters
+Detailed Explanation:
+Create templates for scans.
 
-📜 Settings:
-• Discovery, Port Scanning, Assessment
-• Enable/disable plugins
+Multiple Code Examples:
+1. API Policy Creation:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"name":"My Policy"}' https://localhost:8834/policies
+```
+Explanation: Creates new policy via API.
 
-🛡️ Saving:
-• Save for reuse
-• Share with team
+Common Mistakes:
+- Default policies.
+- Overly aggressive.
+
+Real-World Applications:
+- Custom scans.
+- Compliance.
 
 ⚠️ Safety Tips:
-• Test policies on non-production
-• Avoid overly aggressive scans
+• Test policies.
+• Limit plugins.
 
 💡 Pro Tips:
-• Clone existing policies
-• Optimize for speed
+• Clone policies.
+• Export/import.
 
 [Interactive exercises coming soon!]
 
@@ -261,58 +320,68 @@ Press Escape to return to Intermediate Topics menu.
                 "credentialed" -> """
 🖥️ Credentialed Scans - Authenticated Scanning
 
-Running authenticated scans:
+Run credentialed scans.
 
-🔍 Add Credentials:
-• Scan > Credentials > Add
-• SSH, Windows, or database creds
-• Test credentials before scan
+Detailed Explanation:
+Use creds for deeper scans.
 
-📜 Benefits:
-• Deeper system analysis
-• Fewer false positives
+Multiple Code Examples:
+1. API Add Creds:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"type":"ssh", "username":"user"}' https://localhost:8834/credentials
+```
+Explanation: Adds SSH credential via API.
 
-🛡️ Configuration:
-• Enable in scan policy
-• Limit to trusted hosts
+Common Mistakes:
+- Wrong creds.
+- No testing.
+
+Real-World Applications:
+- Internal audits.
+- Patch checks.
 
 ⚠️ Safety Tips:
-• Secure credential storage
-• Use dedicated accounts
+• Secure creds.
+• Use dedicated accounts.
 
 💡 Pro Tips:
-• Rotate credentials regularly
-• Monitor credentialed scan logs
+• Rotate creds.
+• Log usage.
 
 [Interactive exercises coming soon!]
 
 Press Escape to return to Intermediate Topics menu.
                 """.trimIndent()
                 "reports" -> """
-📈 Reports - Customizing Output
+📈 Reports - Generating Outputs
 
-Generating and customizing reports:
+Create reports from scans.
 
-🔍 Report Types:
-• Executive Summary
-• Detailed Vulnerability Report
-• Compliance Report
+Detailed Explanation:
+Export in various formats.
 
-📜 Customization:
-• Reports > Templates
-• Add filters, logos, sections
+Multiple Code Examples:
+1. API Export:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"format":"html"}' https://localhost:8834/scans/1/export
+```
+Explanation: Exports scan as HTML.
 
-🛡️ Exporting:
-• PDF, HTML, CSV
-• Schedule automatic reports
+Common Mistakes:
+- No customization.
+- Large reports.
+
+Real-World Applications:
+- Client reports.
+- Compliance.
 
 ⚠️ Safety Tips:
-• Encrypt report files
-• Share securely
+• Secure reports.
+• Redact sensitive info.
 
 💡 Pro Tips:
-• Use custom templates
-• Automate report delivery
+• Custom templates.
+• Automate exports.
 
 [Interactive exercises coming soon!]
 
@@ -321,27 +390,33 @@ Press Escape to return to Intermediate Topics menu.
                 "compliance" -> """
 🔎 Compliance Checks - Auditing Systems
 
-Running compliance scans:
+Run compliance scans.
 
-🔍 Templates:
-• Scan > New Scan > Compliance
-• Choose standards (e.g., PCI DSS, CIS)
+Detailed Explanation:
+Use templates for standards.
 
-📜 Configuration:
-• Select audit files
-• Enable in policy settings
+Multiple Code Examples:
+1. API Compliance Scan:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"template":"compliance"}' https://localhost:8834/scans
+```
+Explanation: Starts compliance scan via API.
 
-🛡️ Results:
-• View compliance status
-• Remediate non-compliant items
+Common Mistakes:
+- Wrong template.
+- No creds.
+
+Real-World Applications:
+• PCI DSS audits.
+• CIS benchmarks.
 
 ⚠️ Safety Tips:
-• Verify compliance scope
-• Backup before remediation
+• Authorized systems.
+• Backup before.
 
 💡 Pro Tips:
-• Use custom audit files
-• Schedule regular audits
+• Custom audits.
+• Schedule checks.
 
 [Interactive exercises coming soon!]
 
@@ -353,28 +428,33 @@ Press Escape to return to Intermediate Topics menu.
                 "policies" -> """
 📜 Custom Policies - Advanced Scanning
 
-Creating tailored policies:
+Create custom policies.
 
-🔍 Advanced Settings:
-• Fine-tune plugin options
-• Adjust scan depth, timeouts
-• Enable experimental plugins
+Detailed Explanation:
+Tune plugins, discovery.
 
-📜 Sharing:
-• Export/import policies
-• Use for team consistency
+Multiple Code Examples:
+1. API Custom Policy:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"name":"Custom", "plugins":{}}' https://localhost:8834/policies
+```
+Explanation: Creates policy with custom plugins via API.
 
-🛡️ Testing:
-• Test on sandbox systems
-• Monitor performance impact
+Common Mistakes:
+- Unbalanced settings.
+- No testing.
+
+Real-World Applications:
+- Tailored scans.
+- Integration.
 
 ⚠️ Safety Tips:
-• Avoid untested plugins
-• Log policy changes
+• Test in lab.
+• Document changes.
 
 💡 Pro Tips:
-• Version control policies
-• Optimize for specific targets
+• Import/export.
+• Version control.
 
 [Interactive exercises coming soon!]
 
@@ -383,28 +463,43 @@ Press Escape to return to Advanced Topics menu.
                 "plugins" -> """
 🛠️ Plugins - Managing and Writing
 
-Handling Nessus plugins:
+Manage Nessus plugins.
 
-🔍 Managing Plugins:
-• Plugins > Enable/Disable
-• Update via Settings > Plugins
+Detailed Explanation:
+Plugins are NASL scripts for checks.
 
-📜 Writing Plugins:
-• Use NASL (Nessus Attack Scripting Language)
-• Save in .nasl files
-• Test locally before deployment
+Multiple Code Examples:
+1. Update Plugins:
+```bash
+/opt/nessus/sbin/nessus-update-plugins
+```
+Explanation: Updates vulnerability plugins.
 
-🛡️ Deployment:
-• Upload via Nessus UI
-• Verify plugin execution
+2. Basic NASL Script:
+```nasl
+include("compat.inc");
+description = "Example Plugin";
+script_version("1.0");
+script_set_attribute(attribute:"synopsis", value:"Synopsis");
+script_set_attribute(attribute:"description", value:"Description");
+```
+Explanation: Basic plugin structure.
+
+Common Mistakes:
+- Syntax errors.
+- No testing.
+
+Real-World Applications:
+- Custom vulns.
+- Compliance.
 
 ⚠️ Safety Tips:
-• Test plugins in sandbox
-• Avoid untrusted sources
+• Test locally.
+• Secure code.
 
 💡 Pro Tips:
-• Use NASL documentation
-• Share plugins securely
+• Use NASL docs.
+• Submit to Tenable.
 
 [Interactive exercises coming soon!]
 
@@ -413,58 +508,74 @@ Press Escape to return to Advanced Topics menu.
                 "automation" -> """
 🔄 Automation - Nessus APIs
 
-Automating scans with APIs:
+Automate Nessus with APIs.
 
-🔍 API Setup:
-• Enable API in Settings
-• Generate API keys
-• Use REST API endpoints
+Detailed Explanation:
+Use REST API for scans, reports.
 
-📜 Examples:
-• /scans - Create/launch scans
-• /reports - Generate reports
-• Use curl or Python requests
+Multiple Code Examples:
+1. API Scan Launch:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"uuid":"template-uuid"}' https://localhost:8834/scans
+```
+Explanation: Launches scan with template.
 
-🛡️ Scripting:
-• Automate scan scheduling
-• Integrate with CI/CD
+2. Get Scan Status:
+```bash
+curl -X GET -H "X-ApiKeys: ..." https://localhost:8834/scans/1
+```
+Explanation: Fetches scan status.
+
+Common Mistakes:
+- Wrong keys.
+- No error handling.
+
+Real-World Applications:
+- CI/CD integration.
+- Automated reporting.
 
 ⚠️ Safety Tips:
-• Secure API keys
-• Limit API access
+• Secure API keys.
+• Limit access.
 
 💡 Pro Tips:
-• Use Python for automation
-• Log all API calls
+• Use Python-Tenable.
+• Schedule with cron.
 
 [Interactive exercises coming soon!]
 
 Press Escape to return to Advanced Topics menu.
                 """.trimIndent()
                 "analysis" -> """
-🔍 Advanced Analysis - Deep Data Insights
+🔍 Advanced Analysis - Data Insights
 
-Analyzing scan data:
+Deep dive into scan data.
 
-🔍 Vulnerability Analysis:
-• Filter by CVSS score
-• Cross-reference with CVE
+Detailed Explanation:
+Filter, group, track remediation.
 
-📜 Host Analysis:
-• Group by host or vuln
-• Track remediation progress
+Multiple Code Examples:
+1. API Vuln Export:
+```bash
+curl -X POST -H "X-ApiKeys: ..." -d '{"format":"csv"}' https://localhost:8834/scans/1/export
+```
+Explanation: Exports vulns as CSV.
 
-🛡️ Custom Dashboards:
-• Create in Nessus UI
-• Visualize trends
+Common Mistakes:
+- Ignoring trends.
+- No baselines.
+
+Real-World Applications:
+- Risk assessment.
+- Reporting.
 
 ⚠️ Safety Tips:
-• Secure analysis data
-• Share only with authorized
+• Secure analysis data.
+• Verify findings.
 
 💡 Pro Tips:
-• Export to SIEM
-• Use filters for focus
+• Use dashboards.
+• Integrate with SIEM.
 
 [Interactive exercises coming soon!]
 

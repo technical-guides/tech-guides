@@ -6,14 +6,13 @@ object JavaScriptContentProvider : ContentProvider {
     override fun getWelcomeMessage(): String = """
 🌐 Welcome to the JavaScript Ref. Guide! 🌐
 
-This interactive tutorial will guide you through essential JavaScript concepts,
-from basic syntax to advanced web development.
+This extensive tutorial covers JavaScript from fundamentals to advanced topics, with numerous examples, best practices, and real-world applications to make you a proficient web developer.
 
 📖 What you'll learn:
 
-• Basic Topics: Installation, variables, control structures, functions
-• Intermediate Topics: Arrays/objects, DOM, async basics, modules
-• Advanced Topics: Promises, closures, prototypes, frameworks intro
+• Basic Topics: Installation & setup, variables & data types, control structures, functions
+• Intermediate Topics: Arrays & objects, DOM manipulation, async basics, modules
+• Advanced Topics: Promises & async/await, closures, prototypes & inheritance, frameworks intro
 
 🎯 How to navigate:
 
@@ -24,9 +23,8 @@ from basic syntax to advanced web development.
 🚀 Getting Started:
 
 Choose a topic category from the sidebar to explore subtopics and start learning!
-Each section includes explanations, examples, and best practices.
+Each section includes thorough explanations, multiple code examples, safety tips, pro tips, common mistakes, and real-world applications.
 
-Good luck on your JavaScript journey! 🎓
     """.trimIndent()
 
     override fun getMenuContent(state: NavigationState): String {
@@ -43,7 +41,7 @@ Learn essential JavaScript fundamentals.
 Master web techniques.
 
 🚀 Advanced Topics
-Dive into expert-level usage.
+Dive into expert-level features.
 
 ❌ Exit
 Close the application.
@@ -54,10 +52,10 @@ Close the application.
 Select a subtopic to begin learning:
 
 🛠️ Installation & Setup
-Node.js and browsers.
+Setting up JavaScript environment.
 
 🔤 Variables & Data Types
-let, const, var.
+Understanding basic data.
 
 🔀 Control Structures
 If, switch, loops.
@@ -71,16 +69,16 @@ Defining functions.
 Select a subtopic to advance your skills:
 
 📦 Arrays & Objects
-Manipulating data.
+Manipulating data structures.
 
 🖼️ DOM Manipulation
 Interacting with HTML.
 
 🕒 Async Basics
-Callbacks, setTimeout.
+Callbacks and timers.
 
 📁 Modules
-Import/export.
+Import/export code.
             """.trimIndent()
             NavigationState.ADVANCED_SUBMENU -> """
 🚀 Advanced Topics Menu
@@ -88,16 +86,16 @@ Import/export.
 Select a subtopic for expert-level knowledge:
 
 🔄 Promises & Async/Await
-Handling async.
+Handling asynchronous code.
 
 🎨 Closures
-Function scopes.
+Function scopes and privacy.
 
 🔍 Prototypes & Inheritance
-OOP in JS.
+OOP in JavaScript.
 
 🛠️ Frameworks Intro
-React or Vue basics.
+Getting started with React or Vue.
             """.trimIndent()
         }
     }
@@ -108,79 +106,187 @@ React or Vue basics.
                 "install" -> """
 🛠️ Installation & Setup - Getting Started with JavaScript
 
-JavaScript runs in browsers or Node.js:
+JavaScript is the language of the web, running in browsers and on servers with Node.js. This section covers setup for development and running your first script.
 
-📥 Node.js:
-• Download from nodejs.org
-• node -v - Check version
+Detailed Explanation:
+No installation needed for browsers; use console. For server-side, install Node.js. Use editors like VS Code.
 
-📥 Browser:
-• Use console in DevTools (F12)
-• Script tags in HTML
+Multiple Code Examples:
+1. Node.js Installation on Ubuntu:
+```bash
+sudo apt update
+sudo apt install nodejs npm
+node -v
+```
+Explanation: Installs Node.js and npm, verifies version.
 
-🔧 Hello World:
-• console.log("Hello");
+2. Hello World in Browser:
+```html
+<script>
+    console.log("Hello, JavaScript!");
+</script>
+```
+Explanation: Logs to console in browser.
+
+3. Hello World in Node.js:
+```javascript
+console.log("Hello, JavaScript!");
+// Run: node hello.js
+```
+Explanation: Runs in Node.js.
+
+4. Setup VS Code:
+- Install VS Code
+- Add JavaScript extension
+
+Explanation: Enhances coding with linting.
+
+Common Mistakes:
+- Wrong Node version.
+- No PATH setup.
+
+Real-World Applications:
+- Web development.
+- Server scripts.
 
 ⚠️ Safety Tips:
-• Use strict mode: 'use strict';
-• Avoid global variables
+• Use official Node.js.
+• Update regularly.
 
 💡 Pro Tips:
-• Use npm for packages
-• VS Code for editing
+• Use nvm for versions.
+• Debug with console.
 
 [Interactive exercises coming soon!]
 
 Press Escape to return to Basic Topics menu.
                 """.trimIndent()
                 "variables" -> """
-🔤 Variables & Data Types - Basics
+🔤 Variables & Data Types - Building Blocks of JavaScript
 
-Declaring variables:
+Variables store data in JavaScript, with dynamic typing.
 
-🆕 Variables:
-• let x = 5;
-• const PI = 3.14;
+Detailed Explanation:
+Use let, const, var. Types: number, string, boolean, object.
 
-📋 Types:
-• Number, String, Boolean
-• Object, Array
+Multiple Code Examples:
+1. Variables:
+```javascript
+let age = 25;
+const PI = 3.14;
+var name = "Alice";
+```
+Explanation: let for mutable, const for constant, var for older code.
 
-🔍 Checking:
-• typeof x
+2. Data Types:
+```javascript
+let num = 42;
+let str = "Hello";
+let bool = true;
+let obj = {key: "value"};
+let arr = [1, 2, 3];
+```
+Explanation: Basic types and collections.
+
+3. Typeof:
+```javascript
+console.log(typeof age); // number
+```
+Explanation: Checks type.
+
+4. Template Literals:
+```javascript
+console.log(`Name: $\{name}`);
+```
+Explanation: Interpolates variables.
+
+Common Mistakes:
+- Using var (hoisting issues).
+- Mutable const objects.
+
+Real-World Applications:
+- Data handling in apps.
+- Configurations.
 
 ⚠️ Safety Tips:
-• Use let/const over var
-• Avoid hoisting issues
+• Use let/const.
+• Check types.
 
 💡 Pro Tips:
-• Destructuring: let {a, b} = obj;
-• Template literals
+• Destructuring.
+• Use Object.freeze.
 
 [Interactive exercises coming soon!]
 
 Press Escape to return to Basic Topics menu.
                 """.trimIndent()
                 "control" -> """
-🔀 Control Structures - Flow
+🔀 Control Structures - Flow Control
 
-Controlling flow:
+Control structures direct program execution.
 
-🧭 If/Ternary:
-• if (x > 0) { ... }
-• x > 0 ? 'Positive' : 'Negative'
+Detailed Explanation:
+If-else for conditionals. Switch for multiple cases. Loops for repetition.
 
-📋 Loops:
-• for (let i=0; i<5; i++) { ... }
-• while (x > 0) { ... }
+Multiple Code Examples:
+1. If-Else:
+```javascript
+let x = 10;
+if (x > 5) {
+    console.log("Large");
+} else if (x == 5) {
+    console.log("Medium");
+} else {
+    console.log("Small");
+}
+```
+Explanation: Checks conditions sequentially.
+
+2. Switch:
+```javascript
+let day = "Monday";
+switch (day) {
+    case "Monday":
+        console.log("Start week");
+        break;
+    default:
+        console.log("Other day");
+}
+```
+Explanation: Matches day to cases.
+
+3. For Loop:
+```javascript
+for (let i = 0; i < 3; i++) {
+    console.log(i);
+}
+```
+Explanation: Initializes i, checks condition, increments.
+
+4. For-Of:
+```javascript
+let fruits = ["apple", "banana"];
+for (let fruit of fruits) {
+    console.log(fruit);
+}
+```
+Explanation: Iterates over array elements.
+
+Common Mistakes:
+- Loose == vs ===.
+- Missing breaks.
+
+Real-World Applications:
+- User logic.
+- Data looping.
 
 ⚠️ Safety Tips:
-• Avoid infinite loops
-• Use for...of for arrays
+• Strict equality.
+• Avoid infinite loops.
 
 💡 Pro Tips:
-• Switch with fallthrough
-• Labelled breaks
+• Use forEach.
+• Ternary operators.
 
 [Interactive exercises coming soon!]
 
@@ -189,24 +295,57 @@ Press Escape to return to Basic Topics menu.
                 "functions" -> """
 📊 Functions - Reusable Code
 
-Defining functions:
+Functions encapsulate logic.
 
-🔧 Syntax:
-• function add(a, b) { return a + b; }
+Detailed Explanation:
+Declare with function or arrow.
 
-📜 Arrow:
-• const add = (a, b) => a + b;
+Multiple Code Examples:
+1. Function Declaration:
+```javascript
+function add(a, b) {
+    return a + b;
+}
+```
+Explanation: Adds two numbers.
 
-🛡️ Scope:
-• Block scope with let/const
+2. Arrow Function:
+```javascript
+const greet = (name) => `Hi, $\{name}`;
+```
+Explanation: Concise greeting.
+
+3. Default Params:
+```javascript
+function say( msg = "Hello" ) {
+    console.log(msg);
+}
+```
+Explanation: Uses default if no argument.
+
+4. Rest Params:
+```javascript
+function sum(...nums) {
+    return nums.reduce((a, b) => a + b, 0);
+}
+```
+Explanation: Variable args as array.
+
+Common Mistakes:
+- This in arrow functions.
+- Missing return.
+
+Real-World Applications:
+- Event handlers.
+- Utilities.
 
 ⚠️ Safety Tips:
-• Handle undefined params
-• Avoid arrow for methods
+• Validate args.
+• Avoid side effects.
 
 💡 Pro Tips:
-• Default params: (a=1)
-• Rest params: ...args
+• IIFE for scope.
+• Closures.
 
 [Interactive exercises coming soon!]
 
@@ -218,25 +357,56 @@ Press Escape to return to Basic Topics menu.
                 "arrays" -> """
 📦 Arrays & Objects - Data Structures
 
-Manipulating data:
+Manipulate arrays and objects.
 
-🔍 Arrays:
-• let arr = [1,2,3]; arr.push(4);
+Detailed Explanation:
+Arrays are lists, objects are key-value pairs.
 
-📜 Objects:
-• let obj = {key: 'value'}; obj.newKey = 'new';
+Multiple Code Examples:
+1. Array Methods:
+```javascript
+let nums = [1, 2, 3];
+nums.push(4);
+nums.pop();
+```
+Explanation: Push adds, pop removes last.
 
-🛡️ Methods:
-• arr.map(x => x*2)
-• Object.keys(obj)
+2. Map:
+```javascript
+let doubles = nums.map(n => n * 2);
+```
+Explanation: Maps each element.
+
+3. Object:
+```javascript
+let user = {name: "Alice", age: 25};
+user.email = "alice@email.com";
+delete user.age;
+```
+Explanation: Adds/deletes properties.
+
+4. Spread:
+```javascript
+let newUser = {...user, id: 1};
+let allNums = [...nums, 5];
+```
+Explanation: Copies and adds elements.
+
+Common Mistakes:
+- Mutating originals.
+- Object keys as strings.
+
+Real-World Applications:
+- JSON data.
+- State management.
 
 ⚠️ Safety Tips:
-• Check existence
-• Avoid mutating originals
+• Clone before modifying.
+• Check for keys.
 
 💡 Pro Tips:
-• Spread: [...arr]
-• Destructuring
+• Use Object.keys/values.
+• Destructuring.
 
 [Interactive exercises coming soon!]
 
@@ -245,50 +415,109 @@ Press Escape to return to Intermediate Topics menu.
                 "dom" -> """
 🖼️ DOM Manipulation - Web Interaction
 
-Working with DOM:
+Manipulate HTML with DOM.
 
-🔍 Select:
-• document.getElementById('id')
+Detailed Explanation:
+Select elements, modify attributes, add events.
 
-📜 Modify:
-• elem.textContent = 'New text'
+Multiple Code Examples:
+1. Select Element:
+```javascript
+let elem = document.getElementById("myId");
+```
+Explanation: Gets element by ID.
 
-🛡️ Events:
-• elem.addEventListener('click', () => { ... })
+2. Modify Text:
+```javascript
+elem.textContent = "New text";
+```
+Explanation: Changes text content.
+
+3. Add Element:
+```javascript
+let div = document.createElement("div");
+document.body.appendChild(div);
+```
+Explanation: Creates and adds div.
+
+4. Event Listener:
+```javascript
+elem.addEventListener("click", () => console.log("Clicked"));
+```
+Explanation: Adds click handler.
+
+Common Mistakes:
+- Not waiting for DOM ready.
+- ID/class confusion.
+
+Real-World Applications:
+- Dynamic UIs.
+- Forms.
 
 ⚠️ Safety Tips:
-• Avoid innerHTML
-• Delegate events
+• Sanitize user input.
+• Avoid innerHTML.
 
 💡 Pro Tips:
-• QuerySelector
-• Custom events
+• Use querySelectorAll.
+• Delegation for events.
 
 [Interactive exercises coming soon!]
 
 Press Escape to return to Intermediate Topics menu.
                 """.trimIndent()
                 "async" -> """
-🕒 Async Basics - Non-Blocking
+🕒 Async Basics - Non-Blocking Code
 
-Basic async:
+Basic async with callbacks and timers.
 
-🔍 SetTimeout:
-• setTimeout(() => { ... }, 1000)
+Detailed Explanation:
+Use setTimeout, setInterval, callbacks.
 
-📜 Callbacks:
-• function cb(err, data) { ... }
+Multiple Code Examples:
+1. SetTimeout:
+```javascript
+setTimeout(() => console.log("Delayed"), 1000);
+```
+Explanation: Executes after delay.
 
-🛡️ SetInterval:
-• setInterval(() => { ... }, 1000)
+2. SetInterval:
+```javascript
+setInterval(() => console.log("Repeat"), 1000);
+```
+Explanation: Repeats periodically.
+
+3. Callback:
+```javascript
+function asyncTask(cb) {
+    setTimeout(() => cb("Done"), 1000);
+}
+asyncTask(result => console.log(result));
+```
+Explanation: Calls cb when done.
+
+4. Clear Timer:
+```javascript
+let timer = setTimeout(() => {}, 1000);
+clearTimeout(timer);
+```
+Explanation: Cancels timeout.
+
+Common Mistakes:
+- Callback hell.
+- Not clearing timers.
+
+Real-World Applications:
+- Animations.
+- Polling.
 
 ⚠️ Safety Tips:
-• Clear timeouts
-• Handle callback hell
+• Limit timers.
+• Handle errors in callbacks.
 
 💡 Pro Tips:
-• RequestAnimationFrame
-• Debounce/throttle
+• Use promises for better async.
+• Debounce functions.
 
 [Interactive exercises coming soon!]
 
@@ -297,24 +526,55 @@ Press Escape to return to Intermediate Topics menu.
                 "modules" -> """
 📁 Modules - Code Organization
 
-Using modules:
+Modules for modular code.
 
-🔍 Export:
-• export function func() { ... }
+Detailed Explanation:
+Use import/export for ES6 modules.
 
-📜 Import:
-• import { func } from './module.js'
+Multiple Code Examples:
+1. Export Function:
+```javascript
+// math.js
+export function add(a, b) {
+    return a + b;
+}
+```
+Explanation: Exports add function.
 
-🛡️ Default:
-• export default class { ... }
+2. Import:
+```javascript
+import { add } from "./math.js";
+console.log(add(3, 4));
+```
+Explanation: Imports and uses add.
+
+3. Default Export:
+```javascript
+export default class MyClass {}
+```
+Explanation: Default export.
+
+4. Import Default:
+```javascript
+import MyClass from "./myclass.js";
+```
+Explanation: Imports default.
+
+Common Mistakes:
+- Wrong paths.
+- Type="module" missing.
+
+Real-World Applications:
+- Large apps.
+- Libraries.
 
 ⚠️ Safety Tips:
-• Use type="module" in script
-• Browser support
+• Secure module paths.
+• Avoid global pollution.
 
 💡 Pro Tips:
-• Dynamic import()
-• Tree shaking
+• Dynamic import.
+• Tree shaking.
 
 [Interactive exercises coming soon!]
 
@@ -324,26 +584,64 @@ Press Escape to return to Intermediate Topics menu.
             }
             "advanced" -> when (id) {
                 "promises" -> """
-🔄 Promises & Async/Await - Async Handling
+🔄 Promises & Async/Await - Async Code
 
-Async programming:
+Manage async with promises.
 
-🔍 Promises:
-• new Promise((res, rej) => { ... })
+Detailed Explanation:
+Promises for async results. Await for promise resolution.
 
-📜 Async/Await:
-• async function() { await promise; }
+Multiple Code Examples:
+1. Promise:
+```javascript
+new Promise((resolve, reject) => {
+    setTimeout(() => resolve("Done"), 1000);
+}).then(result => console.log(result));
+```
+Explanation: Resolves after delay.
 
-🛡️ Error Handling:
-• .catch() or try-catch
+2. Reject:
+```javascript
+new Promise((resolve, reject) => {
+    reject("Error");
+}).catch(err => console.log(err));
+```
+Explanation: Handles rejection.
+
+3. Async/Await:
+```javascript
+async function myAsync() {
+    let result = await new Promise((res) => setTimeout(res, 1000, "Done"));
+    return result;
+}
+myAsync().then(console.log);
+```
+Explanation: Awaits promise.
+
+4. Promise.all:
+```javascript
+Promise.all([
+    new Promise(res => res(1)),
+    new Promise(res => res(2))
+]).then(console.log);
+```
+Explanation: Waits for all promises.
+
+Common Mistakes:
+- Forgetting await.
+- Unhandled rejections.
+
+Real-World Applications:
+- API calls.
+- File loading.
 
 ⚠️ Safety Tips:
-• Handle rejections
-• Avoid mixing styles
+• Handle rejections.
+• Avoid blocking.
 
 💡 Pro Tips:
-• Promise.all
-• Race conditions
+• Use Promise.race.
+• Async iterators.
 
 [Interactive exercises coming soon!]
 
@@ -352,50 +650,142 @@ Press Escape to return to Advanced Topics menu.
                 "closures" -> """
 🎨 Closures - Scoped Functions
 
-Using closures:
+Closures capture outer scope.
 
-🔍 Definition:
-• function outer() { let x=1; return () => x; }
+Detailed Explanation:
+Functions remember variables from enclosing scope.
 
-📜 Usage:
-• For private variables
+Multiple Code Examples:
+1. Basic Closure:
+```javascript
+function outer() {
+    let x = 10;
+    return function inner() {
+        return x;
+    }
+}
+const func = outer();
+console.log(func());
+```
+Explanation: Inner returns x from outer.
 
-🛡️ IIFE:
-• (function() { ... })()
+2. Counter:
+```javascript
+function counter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+const c = counter();
+console.log(c()); // 1
+```
+Explanation: Private count incremented.
+
+3. Private Variables:
+```javascript
+function myModule() {
+    let privateVar = "secret";
+    return {
+        getVar: () => privateVar
+    };
+}
+const m = myModule();
+console.log(m.getVar());
+```
+Explanation: Encapsulates privateVar.
+
+Common Mistakes:
+- Modifying closed variables.
+- Memory leaks.
+
+Real-World Applications:
+- Modules.
+- Event handlers.
 
 ⚠️ Safety Tips:
-• Memory leaks
-• Var vs let
+• Avoid large closures.
+• Clear references.
 
 💡 Pro Tips:
-• Module pattern
-• Currying
+• Use for encapsulation.
+• Combine with IIFE.
 
 [Interactive exercises coming soon!]
 
 Press Escape to return to Advanced Topics menu.
                 """.trimIndent()
                 "prototypes" -> """
-🔍 Prototypes & Inheritance - OOP
+🔍 Prototypes & Inheritance - OOP in JS
 
-JS OOP:
+Prototypes for inheritance.
 
-🔍 Prototypes:
-• Object.prototype
+Detailed Explanation:
+Objects inherit from prototypes.
 
-📜 Inheritance:
-• Child.prototype = Object.create(Parent.prototype)
+Multiple Code Examples:
+1. Prototype:
+```javascript
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.greet = function() {
+    console.log("Hi, " + this.name);
+};
+const p = new Person("Alice");
+p.greet();
+```
+Explanation: Adds greet to prototype.
 
-🛡️ Classes (ES6):
-• class Child extends Parent { }
+2. Inheritance:
+```javascript
+function Student(name, grade) {
+    Person.call(this, name);
+    this.grade = grade;
+}
+Student.prototype = Object.create(Person.prototype);
+const s = new Student("Bob", "A");
+s.greet();
+```
+Explanation: Inherits greet, adds grade.
+
+3. Class Syntax:
+```javascript
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+    greet() {
+        console.log("Hi, " + this.name);
+    }
+}
+class Student extends Person {
+    constructor(name, grade) {
+        super(name);
+        this.grade = grade;
+    }
+}
+const s = new Student("Bob", "A");
+s.greet();
+```
+Explanation: ES6 class syntax.
+
+Common Mistakes:
+- Wrong this.
+- Prototype chain issues.
+
+Real-World Applications:
+- OOP structures.
+- Libraries.
 
 ⚠️ Safety Tips:
-• Avoid modifying built-ins
-• Use hasOwnProperty
+• Use new.
+• Check inheritance.
 
 💡 Pro Tips:
-• Proto chain
-• Mixins
+• Use Object.create.
+• Mixins.
 
 [Interactive exercises coming soon!]
 
@@ -404,24 +794,58 @@ Press Escape to return to Advanced Topics menu.
                 "frameworks" -> """
 🛠️ Frameworks Intro - Building Apps
 
-Intro to frameworks:
+Intro to JS frameworks.
 
-🔍 React:
-• const App = () => <div>Hello</div>;
+Detailed Explanation:
+Frameworks like React for UI.
 
-📜 Vue:
-• new Vue({ el: '#app' });
+Multiple Code Examples:
+1. React Component:
+```jsx
+import React from 'react';
+function App() {
+    return <h1>Hello, React!</h1>;
+}
+export default App;
+```
+Explanation: Basic React component.
 
-🛡️ Angular:
-• @Component({ ... })
+2. State in React:
+```jsx
+import { useState } from 'react';
+function Counter() {
+    const [count, setCount] = useState(0);
+    return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+Explanation: State with hook.
+
+3. Vue Instance:
+```javascript
+new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello, Vue!'
+    }
+});
+```
+Explanation: Basic Vue app.
+
+Common Mistakes:
+- No key in lists.
+- Mutable state.
+
+Real-World Applications:
+- SPAs.
+- UIs.
 
 ⚠️ Safety Tips:
-• Learn vanilla first
-• State management
+• Sanitize inputs.
+• Update frameworks.
 
 💡 Pro Tips:
-• Hooks in React
-• Components
+• Use hooks in React.
+• Vuex for state.
 
 [Interactive exercises coming soon!]
 

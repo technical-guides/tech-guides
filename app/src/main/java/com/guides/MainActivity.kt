@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    val topic = "Java"
+    val topic = System.getenv("KEY1") ?: "Linux"
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
             MainScreen(navController = navController, topic = topic)
